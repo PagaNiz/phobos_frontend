@@ -1,16 +1,7 @@
-import { Button } from "@mui/material";
-import { useRouter } from "next/router";
+import { LoginScreen } from "@/screens/login";
 
 const Login = () => {
-  const router = useRouter();
-  return (
-    <div>
-      <h1>Pagina de login</h1>
-      <Button variant="outlined" onClick={() => router.push("/")}>
-        Logar
-      </Button>
-    </div>
-  );
+  return <LoginScreen />;
 };
 
 export default Login;
