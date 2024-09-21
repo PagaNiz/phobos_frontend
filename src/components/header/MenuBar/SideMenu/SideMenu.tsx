@@ -1,6 +1,9 @@
-import MailIcon from "@mui/icons-material/Mail";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import MenuIcon from "@mui/icons-material/Menu";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+import PersonIcon from "@mui/icons-material/Person";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
@@ -14,14 +17,29 @@ import * as React from "react";
 
 const menuItems = [
   {
-    name: "Batata",
-    link: "/batata",
-    icon: <InboxIcon />,
+    name: "Dashboard",
+    link: "/",
+    icon: <DashboardIcon />,
   },
   {
-    name: "Teste",
-    link: "/",
-    icon: <MailIcon />,
+    name: "Estoque",
+    link: "/estoque",
+    icon: <InventoryIcon />,
+  },
+  {
+    name: "Pedidos",
+    link: "/pedidos",
+    icon: <ShoppingCartIcon />,
+  },
+  {
+    name: "Fornecedores",
+    link: "/fornecedores",
+    icon: <LocalShippingIcon />,
+  },
+  {
+    name: "Clientes",
+    link: "/clients",
+    icon: <PersonIcon />,
   },
 ];
 
@@ -34,12 +52,12 @@ export const SideMenu = () => {
 
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-      <List>
+      <List sx={{ backgroundColor: "#1e1e1e", height: "100vh" }}>
         {menuItems.map((item) => (
-          <ListItem key={item.name} disablePadding>
+          <ListItem key={item.name} disablePadding sx={{ color: "white" }}>
             <Link href={item.link}>
               <ListItemButton>
-                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemIcon sx={{ color: "white" }}>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.name} />
               </ListItemButton>
             </Link>

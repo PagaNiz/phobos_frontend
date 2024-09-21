@@ -45,8 +45,8 @@ export const AvatarMenu = ({ logout }: Props) => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={logout}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>Perfil</MenuItem>
+        <MenuItem onClick={logout}>Sair</MenuItem>
       </Menu>
     </div>
   );

@@ -1,7 +1,11 @@
 import { LoginScreen } from "@/screens/login";
 
 const Login = () => {
-  return <LoginScreen />;
+  return (
+    <>
+      <LoginScreen />
+    </>
+  );
 };
 
 export default Login;

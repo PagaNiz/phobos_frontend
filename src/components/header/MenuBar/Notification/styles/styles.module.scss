@@ -1,0 +1,11 @@
+.button {
+  background-color: transparent !important;
+  border: none;
+  .icon {
+    color: white;
+    :hover {
+      color: #838383;
+      cursor: pointer;
+    }
+  }
+}

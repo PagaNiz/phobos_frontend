@@ -6,12 +6,12 @@ import IconButton from "@mui/material/IconButton";
 import Switch from "@mui/material/Switch";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
-import { AvatarMenu, LoginButton } from "./Avatar/AvatarMenu";
-import style from "./styles/MenuAppBar.module.scss";
-import { SideMenu } from "./SideMenu/SideMenu";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import * as React from "react";
+import { AvatarMenu } from "./Avatar/AvatarMenu";
+import { SideMenu } from "./SideMenu/SideMenu";
+import style from "./styles/MenuAppBar.module.scss";
+import { NotificationBell } from "./Notification/NotificationBell";
 
 type Props = {
   titlePage: string;
@@ -28,7 +28,7 @@ const MenuAppBar = ({ titlePage }: Props) => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ backgroundColor: "#1e1e1e" }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -42,26 +42,29 @@ const MenuAppBar = ({ titlePage }: Props) => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {titlePage}
           </Typography>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  className={style.switch}
-                  checked={auth}
-                  onChange={handleChange}
-                  aria-label="login switch"
-                />
-              }
-              label={
-                <AvatarMenu
-                  logout={() => {
-                    setAuth(false);
-                    router.push("/login");
-                  }}
-                />
-              }
-            />
-          </FormGroup>
+          <div style={{ display: "flex", alignItems: "center", gap: "5rem" }}>
+            <NotificationBell />
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    className={style.switch}
+                    checked={auth}
+                    onChange={handleChange}
+                    aria-label="login switch"
+                  />
+                }
+                label={
+                  <AvatarMenu
+                    logout={() => {
+                      setAuth(false);
+                      router.push("/login");
+                    }}
+                  />
+                }
+              />
+            </FormGroup>
+          </div>
         </Toolbar>
       </AppBar>
     </Box>
