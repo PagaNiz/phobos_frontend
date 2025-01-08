@@ -12,18 +12,18 @@ import { AvatarMenu } from "./Avatar/AvatarMenu";
 import { SideMenu } from "./SideMenu/SideMenu";
 import style from "./styles/MenuAppBar.module.scss";
 import { NotificationBell } from "./Notification/NotificationBell";
+import { useAuth } from "@/provider/auth";
 
 type Props = {
   titlePage: string;
 };
 
 const MenuAppBar = ({ titlePage }: Props) => {
+  const { signOut } = useAuth();
   const router = useRouter();
 
-  const [auth, setAuth] = React.useState(true);
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
+    // setAuth(event.target.checked);
   };
 
   return (
@@ -49,19 +49,11 @@ const MenuAppBar = ({ titlePage }: Props) => {
                 control={
                   <Switch
                     className={style.switch}
-                    checked={auth}
                     onChange={handleChange}
                     aria-label="login switch"
                   />
                 }
-                label={
-                  <AvatarMenu
-                    logout={() => {
-                      setAuth(false);
-                      router.push("/login");
-                    }}
-                  />
-                }
+                label={<AvatarMenu logout={signOut} />}
               />
             </FormGroup>
           </div>

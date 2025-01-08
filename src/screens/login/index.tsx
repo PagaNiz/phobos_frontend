@@ -1,46 +1,25 @@
-import api from "@/services/api";
-import Box from "@mui/material/Box";
+import { useAuth } from "@/provider/auth";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { Formik } from "formik";
-import { useRouter } from "next/router";
 import { object, string } from "yup";
 import { InputLogin } from "./InputLogin";
 import { LoginButton } from "./LoginButton";
 import { LoginForm } from "./types";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
-);
-
 export const LoginScreen = () => {
-  const router = useRouter();
+  const { signIn } = useAuth();
+
   const initialValues: LoginForm = {
     email: "",
     password: "",
   };
+
   const validationSchema = object({
     email: string().email("Email inválido").required("Email é obrigatório!"),
     password: string().required("Senha é obrigatória!"),
   });
-
-  const handleSubmit = async (values: LoginForm) => {
-    try {
-      const { data } = await api.post("/api/login", {
-        email: values.email,
-        password: values.password,
-      });
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <div
@@ -53,7 +32,7 @@ export const LoginScreen = () => {
     >
       <Formik
         initialValues={initialValues}
-        onSubmit={handleSubmit}
+        onSubmit={(values) => signIn(values)}
         validationSchema={validationSchema}
       >
         <Card
