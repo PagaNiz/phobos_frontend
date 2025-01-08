@@ -19,10 +19,14 @@
     "axios": "^1.7.7",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.8",
+    "formik": "^2.4.6",
     "next": "14.2.8",
+    "nookies": "^2.5.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-toastify": "^11.0.2",
     "sass": "^1.79.1",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "yup": "^1.6.1"
   }
 }

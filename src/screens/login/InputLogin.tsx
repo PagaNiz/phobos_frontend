@@ -12,6 +12,7 @@ export const InputLogin = () => {
       <FormControl>
         <Input
           id="email"
+          type="email"
           name="email"
           placeholder="Email"
           value={values.email}
@@ -24,6 +25,7 @@ export const InputLogin = () => {
       <FormControl>
         <Input
           id="password"
+          type="password"
           name="password"
           placeholder="Senha"
           value={values.password}
