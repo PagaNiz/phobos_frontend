@@ -27,7 +27,7 @@ export const TableSupplier = ({ toggleModal }: Props) => {
   );
   const [modalDeleteConfirmation, setModalDeleteConfirmation] = useState(false);
 
-  const { data: suppliers, loading } =
+  const { data: suppliers, loading, reloadTable } =
     useReloadTables<SupplierType>("/api/suppliers/");
 
   if (loading) {
@@ -62,6 +62,7 @@ export const TableSupplier = ({ toggleModal }: Props) => {
       await api.delete(`/api/suppliers/${suppliers.id}`);
       setModalDeleteConfirmation(false);
       toast.success("Fornecedor Deletado");
+      reloadTable();
     } catch (error) {
       toast.error("Não foi possivel deletar o fornecedor!");
       console.log(error);

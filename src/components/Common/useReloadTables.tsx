@@ -1,5 +1,5 @@
 import api from "@/services/api";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 type Data<T> = {
@@ -17,11 +17,27 @@ type Data<T> = {
   data: T[];
 };
 
+export const triggerReloadTables = () => {
+  window.dispatchEvent(new Event("reloadTables"));
+};
+
 export function useReloadTables<T>(url: string) {
   const [data, setData] = useState<T[]>([]);
   const [loading, setLoading] = useState(false);
+  const [reloadKey, setReloadKey] = useState(0);
 
-  const effectRun = useRef(false);
+  const reloadTable = useCallback(() => {
+    setReloadKey((prev) => prev + 1);
+  }, []);
+
+  useEffect(() => {
+    const handleReload = () => reloadTable();
+    window.addEventListener("reloadTables", handleReload);
+
+    return () => {
+      window.removeEventListener("reloadTables", handleReload);
+    };
+  }, [reloadTable]);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -30,27 +46,28 @@ export function useReloadTables<T>(url: string) {
       try {
         const { data } = await api.get(url, { signal: abortController.signal });
         setData(data.data);
-      } catch (error) {
-        console.error(error);
-        toast.error("Erro ao carregar a lista.");
+      } catch (error: any) {
+        if (error.name !== "CanceledError" && error.code !== "ERR_CANCELED") {
+          console.error(error);
+          toast.error("Erro ao carregar a lista.");
+        }
       } finally {
-        setLoading(false);
+        if (!abortController.signal.aborted) {
+          setLoading(false);
+        }
       }
     };
-    if (effectRun.current) {
-      loadData();
-    }
+
+    loadData();
 
     return () => {
       abortController.abort();
-      setData([]);
-      setLoading(false);
-      effectRun.current = true;
     };
-  }, [url]);
+  }, [url, reloadKey]);
 
   return {
     data,
     loading,
+    reloadTable,
   };
 }

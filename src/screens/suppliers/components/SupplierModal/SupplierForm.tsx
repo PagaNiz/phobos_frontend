@@ -5,7 +5,7 @@ import { number, object, string } from "yup";
 import { SuppliersFormType } from "../../types";
 import { SupplierInput } from "./SupplierInput";
 import { SupplierType } from "@/types/Supplier";
-import { useReloadTables } from "@/components/Common/useReloadTables";
+import { useReloadTables, triggerReloadTables } from "@/components/Common/useReloadTables";
 
 type Props = {
   supplier: SupplierType | null;
@@ -68,6 +68,7 @@ export const SupplierForm = ({ supplier, onSubmitSuccess }: Props) => {
         console.log("ENTROU NO POST");
         toast.success("Fornecedor cadastado com sucesso.");
       }
+      triggerReloadTables();
       if (onSubmitSuccess) {
         onSubmitSuccess();
       }
