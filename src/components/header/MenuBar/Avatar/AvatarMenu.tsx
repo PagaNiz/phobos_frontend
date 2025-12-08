@@ -1,7 +1,8 @@
-import { Avatar, IconButton } from "@mui/material";
+import { useThemeContext } from "@/provider/ThemeContext";
+import { Avatar, FormControlLabel, IconButton, Switch } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import * as React from "react";
+import { useState } from "react";
 import BackgroundLetterAvatars from "./Avatar";
 
 type Props = {
@@ -14,7 +15,8 @@ export const LoginButton = ({ login }: Props) => {
 };
 
 export const AvatarMenu = ({ logout }: Props) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const { toggleTheme, mode } = useThemeContext();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -45,6 +47,14 @@ export const AvatarMenu = ({ logout }: Props) => {
           "aria-labelledby": "basic-button",
         }}
       >
+        <MenuItem>
+          <FormControlLabel
+            control={
+              <Switch checked={mode === "dark"} onChange={toggleTheme} />
+            }
+            label={mode === "dark" ? "Dark Mode" : "Light Mode"}
+          />
+        </MenuItem>
         <MenuItem onClick={handleClose}>Perfil</MenuItem>
         <MenuItem onClick={logout}>Sair</MenuItem>
       </Menu>
