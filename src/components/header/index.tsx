@@ -1,11 +1,9 @@
+import { useAuth } from "@/provider/auth";
 import MenuAppBar from "./MenuBar/MenuApp";
 
 const Header = () => {
-  return (
-    <>
-      <MenuAppBar titlePage="HOME" />
-    </>
-  );
+  const { user } = useAuth();
+  return user && <MenuAppBar titlePage="PHOBOS" />;
 };
 
 export default Header;

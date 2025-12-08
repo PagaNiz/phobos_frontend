@@ -1,6 +1,7 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import { useAuth } from "@/provider/auth";
 
 const stringToColor = (string: string) => {
   let hash = 0;
@@ -30,9 +31,10 @@ const stringAvatar = (name: string) => {
 };
 
 const BackgroundLetterAvatars = () => {
+  const { user } = useAuth();
   return (
     <Stack direction="row" spacing={2}>
-      <Avatar {...stringAvatar("Lucas Pagani")} />
+      <Avatar {...stringAvatar(user?.name ?? "Not Found")} />
     </Stack>
   );
 };

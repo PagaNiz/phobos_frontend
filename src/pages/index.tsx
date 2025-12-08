@@ -3,7 +3,7 @@ import Header from "../components/header";
 const Home = () => {
   return (
     <>
-      <Header />
+      <h1>OI MEU CHAPA</h1>
     </>
   );
 };

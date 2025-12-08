@@ -1,0 +1,15 @@
+@import "../../styles/_variables.scss";
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  .loadingCircle {
+    color: $phobos-violet;
+  }
+  .typographyLoading {
+    font-weight: bold;
+  }
+}

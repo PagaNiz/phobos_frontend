@@ -54,7 +54,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const signOut = useCallback(
     (cleanLogin?: boolean) => {
       destroyCookie(null, "Phobos.token");
-      destroyCookie(undefined, "Phobos.company");
+      destroyCookie(undefined, "Phobos.user");
       if (cleanLogin) {
         setUser(null);
         router.push("/login");
@@ -78,7 +78,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const params = {
         ...(abortController ? { signal: abortController.signal } : {}),
       };
-
       await api
         .get("/api/login", params)
         .then(async (res: AxiosResponse<User>) => {
@@ -156,7 +155,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Save into cookies
   useEffect(() => {
-    setCookie(null, "Phobos.company", String(user?.id), {
+    setCookie(null, "Phobos.user", String(user?.id), {
       maxAge: 60 * 60 * 24 * 10, // 10 Dias
       path: "/",
     });

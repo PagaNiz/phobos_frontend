@@ -1,0 +1,20 @@
+.boxContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400;
+  border: 2px solid #000;
+  border-radius: 1rem;
+  box-shadow: 24;
+  padding: 4rem;
+  .inputContainer {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+  }
+}
+
+.addIcon {
+  color: #ffffff;
+}
